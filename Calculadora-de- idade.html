@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<center>
+<head>
+  <title>Calculadora de idade!</title>
+  <h1 style="color:purple;">Calculadora de idade.</h1>
+  <style>
+  body {
+  font-family: Arial, sans-serif;
+  background-color: #f1f1f1;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #333;
+}
+
+.dob-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.calculate-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.calculate-button:hover {
+  background-color: #45a049;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 24px; /* Increased font size */
+  font-weight: bold;
+  color: #3366cc; /* New color */
+}
+
+.footer {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+  color: #555;
+  font-size: 14px;
+  text-align: center;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Calculadora de idade.</h2>
+    <label for="dob-input">A sua idade total.:</label>
+    <input type="date" id="dob-input" class="dob-input">
+    <button id="calculate-button" class="calculate-button">calcular idade.</button>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>const calculateButton = document.getElementById('calculate-button');
+const dobInput = document.getElementById('dob-input');
+const result = document.getElementById('result');
+
+calculateButton.addEventListener('click', () => {
+  const dob = new Date(dobInput.value);
+  if (isValidDate(dob)) {
+    const age = calculateAge(dob);
+    result.innerHTML = `
+      <strong>A sua idade é:</strong><br>
+      ${age.years} anos<br>
+      ${age.months} meses<br>
+      ${age.days} dias<br>
+      ${age.minutes} minutos<br>
+    `;
+  } else {
+    result.textContent = 'Por favor valide a sua idade..';
+  }
+});
+
+function isValidDate(date) {
+  return date instanceof Date && !isNaN(date);
+}
+
+function calculateAge(date) {
+  const today = new Date();
+  let years = today.getFullYear() - date.getFullYear();
+  let months = today.getMonth() - date.getMonth();
+  let days = today.getDate() - date.getDate();
+  let minutes = Math.floor((today - date) / (1000 * 60));
+
+  if (months < 0 || (months === 0 && today.getDate() < date.getDate())) {
+    years--;
+    months += 12;
+  }
+
+  if (days < 0) {
+    months--;
+    const prevMonthDate = new Date(today.getFullYear(), today.getMonth() - 1, date.getDate());
+    days = Math.floor((today - prevMonthDate) / (1000 * 60 * 60 * 24));
+  }
+
+  return {
+    years,
+    months,
+    days,
+    minutes
+  };
+}
+</script>
+</body>
+</center>
+</html>
+
