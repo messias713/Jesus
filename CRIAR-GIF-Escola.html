@@ -1,0 +1,217 @@
+
+
+
+<html>
+<h1 style="color:pink;">Pesquise os seus gif favoritos! Exemplo Gif espiritual.<br>E vai aparecer varias opções e desenhos gif para você.</h1>
+<main class="all">
+  <div class="info">
+  <button class="toggle-button">Read</button>
+  <div class="content">
+    <span>1. Escolha na barra de pesquisa o seu gif! Exemplo. Gif anjos.</span>
+      
+<span> 2. Na pagina aparecem varias opções de escolha de gif.</span>
+      
+<span>3. Para deletar um gif click 3 vezes em cima do mesmo gif.</span>
+
+<span> 4. Para limpar os resultados da pesquisa. Click direto no button de pesquisa.</span>
+  </div>
+</div>
+
+
+    <div class="search"><input class="write" type="text" placeholder="What you looking for?"> <button class="button"> Search </button></div> 
+    <div class="take"></div>
+    <div class="results"></div> 
+    <div class="recently-used"></div>
+    <button class="load-more" style="display:none;">Load more</button>
+</main>
+
+<script>document.addEventListener('DOMContentLoaded', function () {
+  const block = document.querySelector('.info');
+  const content = block.querySelector('.content');
+  const toggleButton = block.querySelector('.toggle-button');
+
+  toggleButton.addEventListener('click', function () {
+    content.classList.toggle('open');
+    if (content.classList.contains('open')) {
+      toggleButton.innerHTML = '<svg width="12" height="12" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.11 2.697L2.698 4.11 6.586 8l-3.89 3.89 1.415 1.413L8 9.414l3.89 3.89 1.413-1.415L9.414 8l3.89-3.89-1.415-1.413L8 6.586l-3.89-3.89z" fill="#000"></path></svg>';
+      toggleButton.classList.add('in');
+    } else {
+      content.style.display = 'none';
+      toggleButton.style.display = 'none';
+    }
+  });
+});
+const apiKey = 'LIVDSRZULELA';
+const limit = 50;
+let offset = 0;
+let currentSearchTerm = '';
+let recentlyUsedImages = []; 
+let clickCount = 0;
+let selectedImageIndex = -1;
+
+window.addEventListener('DOMContentLoaded', function() {
+    recentlyUsedImages = JSON.parse(localStorage.getItem('recentlyUsedImages')) || [];
+    const recentlyUsedContainer = document.querySelector('.recently-used');
+    recentlyUsedImages.forEach(imageSrc => {
+        const recentlyUsedImage = document.createElement('img');
+        recentlyUsedImage.src = imageSrc;
+        recentlyUsedContainer.appendChild(recentlyUsedImage);
+    });
+});
+
+document.querySelector('.button').addEventListener('click', function() {
+    const searchTerm = document.querySelector('.write').value.trim();
+
+    if (searchTerm !== '') {
+        currentSearchTerm = searchTerm;
+        offset = 0; 
+        fetchResults();
+    } else {
+        document.querySelector('.results').innerHTML = '';
+        document.querySelector('.load-more').style.display = 'none';
+        document.querySelector('.recently-used').style.display = 'flex';
+    }
+});
+
+document.querySelector('.results').addEventListener('click', function(event) {
+    if (event.target.tagName === 'IMG') {
+        const clickedImageSrc = event.target.src;
+        addImageToRecentlyUsed(clickedImageSrc);
+    }
+});
+
+document.querySelector('.recently-used').addEventListener('click', function(event) {
+    if (event.target.tagName === 'IMG') {
+        const imageSrc = event.target.src;
+
+        if (selectedImageIndex !== -1 && recentlyUsedImages[selectedImageIndex] === imageSrc) {
+            clickCount++;
+        } else {
+            clickCount = 1;
+            selectedImageIndex = recentlyUsedImages.indexOf(imageSrc);
+        }
+
+        if (clickCount === 2) {
+            
+            event.target.style.boxShadow = '0 0 0 2px #cd2c12';
+
+        }
+
+        if (clickCount === 3) {
+            const recentlyUsedContainer = document.querySelector('.recently-used');
+            recentlyUsedContainer.removeChild(event.target);
+
+            recentlyUsedImages.splice(selectedImageIndex, 1);
+            localStorage.setItem('recentlyUsedImages', JSON.stringify(recentlyUsedImages));
+
+          
+            clickCount = 0;
+            selectedImageIndex = -1;
+        }
+    }
+});
+
+document.querySelector('.load-more').addEventListener('click', function() {
+    offset += limit;
+    fetchResults();
+});
+
+function fetchResults() {
+    const url = `https://api.tenor.com/v1/search?key=${apiKey}&q=${currentSearchTerm}&limit=${limit}&pos=${offset}`;
+    
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            displayResults(data.results);
+
+            if (data.results.length === limit) {
+                document.querySelector('.load-more').style.display = 'block';
+            } else {
+                document.querySelector('.load-more').style.display = 'none';
+            }
+
+            const resultsImages = document.querySelectorAll('.results img');
+            const recentlyUsedContainer = document.querySelector('.recently-used');
+            
+            if (resultsImages.length === 0 && currentSearchTerm === '') {
+                recentlyUsedContainer.style.display = 'block';
+            } else {
+                recentlyUsedContainer.style.display = 'none';
+                recentlyUsedContainer.innerHTML = '';
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+function displayResults(results) {
+    const resultsContainer = document.querySelector('.results');
+
+    if (offset === 0) {
+        resultsContainer.innerHTML = '';
+    }
+
+    results.forEach(result => {
+        const resultElement = document.createElement('img');
+        resultElement.src = result.media[0].gif.url;
+        resultElement.alt = result.title;
+        resultsContainer.appendChild(resultElement);
+    });
+}
+
+function addImageToRecentlyUsed(imageSrc) {
+    if (!recentlyUsedImages.includes(imageSrc)) {
+        recentlyUsedImages.push(imageSrc);
+        localStorage.setItem('recentlyUsedImages', JSON.stringify(recentlyUsedImages));
+        updateRecentlyUsedDisplay();
+    }
+}
+
+function removeImageFromRecentlyUsed(imageSrc) {
+    recentlyUsedImages = recentlyUsedImages.filter(img => img !== imageSrc);
+    localStorage.setItem('recentlyUsedImages', JSON.stringify(recentlyUsedImages));
+    updateRecentlyUsedDisplay();
+}
+
+function updateRecentlyUsedDisplay() {
+    const recentlyUsedContainer = document.querySelector('.recently-used');
+    recentlyUsedContainer.innerHTML = '';
+    recentlyUsedImages.forEach(imageSrc => {
+        const recentlyUsedImage = document.createElement('img');
+        recentlyUsedImage.src = imageSrc;
+        recentlyUsedContainer.appendChild(recentlyUsedImage);
+    });
+}
+
+
+document.querySelector('.results').addEventListener('click', function(event) {
+    if (event.target.tagName === 'IMG') {
+        addImageToTake(event.target.src);
+    }
+});
+
+
+document.querySelector('.recently-used').addEventListener('click', function(event) {
+    if (event.target.tagName === 'IMG') {
+        addImageToTake(event.target.src);
+    }
+});
+function addImageToTake(imageSrc) {
+    const takeContainer = document.querySelector('.take');
+    let spanExists = takeContainer.querySelector('span') !== null;
+    
+    if (!spanExists) {
+       
+        const spanElement = document.createElement('span');
+        spanElement.innerHTML = `[img no-zoom w=40]${imageSrc}[/img]`;
+        takeContainer.appendChild(spanElement);
+    } else {
+       
+        const spanElement = takeContainer.querySelector('span');
+        spanElement.innerHTML = `[img no-zoom w=40]${imageSrc}[/img]`;
+    }
+
+    
+    takeContainer.style.display = 'flex';
+}
+</script>
+</html>
