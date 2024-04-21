@@ -1,0 +1,69 @@
+<html>
+<meta charset="utf-8">
+<center>
+<style>
+
+
+
+.cen{
+    width: 800px;
+    margin: 200px auto;
+}
+
+button{
+    display: block;
+    padding: 7px 60px;
+    background-color: #b813b8;
+    margin: auto;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+
+}
+
+p{
+    height: 20px;
+    padding: 20px;
+    background-color: #000;
+    color: #fff;
+    width: 100%;
+    border-radius: 10px;
+
+}
+</style>
+
+
+
+
+
+<body>
+<h1 style="color:orange;">Escritor escondido.</h1>
+<img src="https://media.tenor.com/hymUXMIV4F4AAAAC/marketing-communication.gif">
+<div class="cen">
+        <button class="btn" id="btn">Click</button>
+        <p id="paragraph"></p>
+       </div>
+<script>
+var btn=document.getElementById("btn"),
+    par=document.getElementById("paragraph"),
+    i=0;
+
+btn.onclick=function(){
+    "use strict"
+    var content="O que você escreve, dita quem pode ser. Amor na vida, é acreditar no viver. Sem nunca esquecer, que a fé é eterno acreditar, evoluir, aprendizar.Verdade honesta, vem de um espírito de bem! Que apenas amor, tem para amar, doar. Sem nada pedir ou esperar. ";
+    var e=setInterval(function(){
+        par.textContent+=content[i];
+        i++;
+        if(i>content.length-1){
+            clearInterval(e);
+            par.textContent=""
+        }
+       
+    },100)
+}
+</script>
+
+</body>
+</center>
+</html>
