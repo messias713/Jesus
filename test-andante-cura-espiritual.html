@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      background-image: url('https://media.tenor.com/z4_bGwrYdkAAAAAC/angel-anjos.gif');
+      background-size: cover;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+    
+    #scrolling-text {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #DC143C;
+      font-size: 24px;
+      white-space: nowrap;
+      animation: scroll-text 10s linear infinite;
+    }
+    
+    @keyframes scroll-text {
+      0% {
+        left: 100%;
+      }
+      100% {
+        left: -100%;
+      }
+    }
+  </style>
+</head>
+<body>
+<center><h1 style="color:blue;">Cura espiritual.</h1></center>
+  <div id="scrolling-text">Que a cura espiritual esteja sempre presente em nossas vidas.<br>Que a verdade faça parte da nossa consciência, o amor a luz perdão do nosso coração.<br>A cura espiritual, a nossa principal escolha. <br>Deixemos o pecado, assumindo a nossa culpa,<br>paguemos a expiação.<br>Tentemos seguir em frente em honestidade, dignidade.<br> fé em Deus maior!...</div>
+
+  <script>
+    // JavaScript para ajustar a largura do texto com base no tamanho da janela
+    window.onload = function() {
+      const scrollingText = document.getElementById('scrolling-text');
+      const textWidth = scrollingText.offsetWidth;
+      const windowWidth = window.innerWidth;
+
+      if (textWidth > windowWidth) {
+        scrollingText.style.fontSize = windowWidth / textWidth * 24 + 'px';
+      }
+    }
+  </script>
+</body>
+
+</html>
