@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+  .mainContainer {
+  border: 3px solid grey;
+  width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  color: #f5f5f5;
+}
+
+.visibleBackground {
+  background-image: url(https://i.postimg.cc/Jz376Lbj/wood-3157395-1920.webp);
+  background-size: cover;
+  background-position: left 45%;
+}
+
+.hiddenBackground {
+  background-image: url(https://i.postimg.cc/7LCsPxm2/20170317130014-0.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: skyblue;
+}
+
+.hiddenContent {
+  opacity: 0;
+}
+
+h1,
+h2 {
+  width: 400px;
+  background-color: skyblue;
+  text-align: center;
+  margin: 20px auto;
+  color: #3d2714;
+  margin-bottom: 20px;
+}
+
+p {
+  background-color: #857262;
+  color: aliceblue;
+}
+
+ul {
+  margin-bottom: 10px;
+  background-color: #857262;
+}
+
+ul li {
+  text-align: left;
+}
+
+i,
+em,
+strong,
+b {
+  color: rgb(20, 12, 13);
+  font-weight: bold;
+}
+
+/* em {
+  color: rgb(116, 243, 201);
+} */
+
+button {
+  margin: 30px auto;
+  background-color: #857262;
+  text-transform: uppercase;
+  font-weight: bold;
+  align-items: center;
+  padding: 20px;
+  outline: 3px solid skyblue;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+
+button:hover {
+  cursor: pointer;
+  color: #f5f5f5;
+}
+
+.myImg {
+  margin-top: 20px;
+  width: 400px;
+  outline: 3px solid whitesmoke;
+  transform: rotate(5deg);
+}
+#video {
+      width: 50%;
+      height: auto;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: transform 1s;
+    }
+
+  </style>
+  <title>A realidade do meu sonho!</title>
+ <h1 style="color:#DC143C;">Fé! A verdade do meu sonho.</h1>
+ 
+  <script>let button = document.querySelector("button");
+button.addEventListener("click", () => {
+  console.log(
+    "Acredita, no ser fé. paz interior, sempre representa amor. :) "
+  );
+
+  if (button.textContent === "Fé, a verdade do meu sonho:)") {
+    button.textContent = "A minha pagina.";
+  } else if (button.textContent === "seja feliz por favor:") {
+    button.textContent = "Meu acreditar :)";
+  }
+
+  button.classList.toggle("text1");
+  //   button.classList.toggle("text2");
+  let mainContainer = document.querySelector(".mainContainer");
+  mainContainer.classList.toggle("hiddenBackground");
+  mainContainer.classList.toggle("visibleBackground");
+  let contentContainer = document.querySelector(".contentContainer");
+  contentContainer.classList.toggle("hiddenContent");
+   var video = document.getElementById('video');
+    var screenWidth = window.innerWidth;
+    var videoWidth = video.offsetWidth;
+
+    video.style.transform = "translateX(" + (screenWidth - videoWidth) + "px)";
+
+    setTimeout(function() {
+      video.style.transform = "translateX(0)";
+    }, 1000);
+});</script>
+</head>
+
+<body>
+  <div class="mainContainer visibleBackground">
+    <div class="contentContainer">
+      <h1>Fé, a minha verdade.</h1>
+      <img class="myImg" src="https://media.tenor.com/cItu4Y46NrsAAAAC/peace-happy-birthday.gif" alt="Minha paz interior." /> <br><br><br><br><br><br><br>
+      <h2>Eu sou a paz.</h2>
+      <p>
+        Desenvolver força, coragem e paz interior demanda tempo. Não espere resultados rápidos e imediatos, sob o pretexto de que decidiu mudar. Cada ação que você executa permite que essa decisão se torne efetiva dentro de seu coração. <strong>Sem paz interior, sem calma interior, é difícil encontrar uma paz duradoura.</strong> na początek. A minha luz me ensina.
+        <i>"Minha verdade :)"</i> Descobri que o mais alto grau de paz interior decorre da prática do amor e da compaixão. Quanto mais nos importamos com a felicidade de nossos semelhantes, maior o nosso próprio bem-estar. Ao cultivarmos um sentimento profundo e carinhoso pelos outros, passamos automaticamente para um estado de serenidade. Esta é a principal fonte da felicidade. <em>A minha paz interior.</em>.
+      </p>
+      <h2>Meu hobby</h2>
+      <p>
+      <ul>
+        <li>
+          Uwielbiam jeździć co roku nad polskie morze. Kocham Bałtyk
+          pomimo wiatru, zimna i paragonów grozy.
+        </li>
+        <li>
+          Gry planszowe (najlepiej z negatywną interakcją) to pasja moich ostatnich kilku lat. Mam nadzieję, że znajdę na nie więcej czasu bo niestety badziej je ostatnio kolekcjonuje niż w nie gram.
+
+        </li>
+
+      </ul>
+      </p>
+    </div>
+    <button>Fé, a minha luz. :)</button>
+
+  </div>
+<iframe id="video"width="539" height="404" src="https://www.youtube.com/embed/I8BVrtpe9sM" title="ABBA   I Believe In Angels ♫♫" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</body>
+
+</html>
