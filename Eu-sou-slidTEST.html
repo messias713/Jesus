@@ -1,0 +1,70 @@
+<html>
+<meta charset="utf-8">
+<center><h1 style="color:red;">Eu sou</h1></center>
+<pre id="sliding-text" style="white-space: nowrap;">
+ Eu sou!
+
+
+A energia que vos pede união.
+O amor que vos oferece reconciliação!
+A fé que vos pede persistência.
+Eu sou.
+O universo que veio do nada.
+A vida que vos dá vida.
+O pão, a agua que vos mantém vivos!
+Eu sou.
+O que vos pede desentorpecimento,
+sem interacionismos de fanatismos.
+Eu sou!
+O todo, de todos sermos um.
+A jornada de todo o começo.
+O caminho da verdade, peregrino!
+Eu sou!
+A luz que vos salvou.
+A lealdade que nunca vos pode faltar,
+nas horas mais difíceis!
+Eu sou!
+O filho do homem.
+O espírito alma da cura,
+a fé inabalável,
+como um todo!
+Todos somos um.
+Eu sou!
+O perdão para os pecadores
+em genuíno arrependimento.
+O alimento para os que manteem a fé em mim.
+Eu sou!
+A fé na própria fé.
+Filho do pai,
+e da mãe Maria.
+Eu sou!
+Apenas a salvação,
+o Messias da liberdade!
+Jesus!
+Todos os que vierem a mim,
+em mim encontrarão.
+A paz, amor e redenção!
+Eu sou,
+a salvação!
+Eu sou!!!!!
+<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEHmfABh1hEka9VpF3zbSDsE2LlD9v8wnN6id9_9jjGod0RCLBi9w51XnO7slJS2cnUfabaHgRxA83kH8GO0jzyKc5xvht2wnsFCwJUOYB9DXC9g4lt8I38paZV5NHRuMCeXnPwgB9uIY_75UXXwmbxaJpaWzQnLE81mjcz1IAAjASajuTwQX6FT4uToT8/s320/342822269_1685171251929573_6523801291832398216_n.jpg" width="60%" height="50%">
+
+</pre>
+
+<script>
+var slidingText = document.getElementById('sliding-text');
+var xPosition = slidingText.offsetWidth;
+
+function slideText() {
+  xPosition--;
+  if (xPosition < -slidingText.scrollWidth) {
+    xPosition = slidingText.offsetWidth;
+  }
+  slidingText.style.transform = "translateX(" + xPosition + "px)";
+  requestAnimationFrame(slideText);
+}
+
+slideText();
+</script>
+
+</html>
