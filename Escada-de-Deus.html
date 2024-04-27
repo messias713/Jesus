@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<center>
+<style>
+#escada {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+#escada div {
+  position: absolute;
+  width: 100px;
+  transform-origin: 0 100%;
+  white-space: nowrap;
+}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escada De Deus!</title>
+<h1 style="color:blue;">Escada de Deus.</h1>
+</head>
+<body>
+<div id="escada"></div>
+
+<script>
+const escada = document.getElementById('escada');
+const frases = ['Deus é santo', 'Deus é amor', 'Deus é justo', 'Deus é fiel', 'Deus é poderoso', 'Deus é misericordioso', 'Deus é soberano', 'Deus é gracioso', 'Deus é perfeito', 'Deus é eterno'];
+
+let angle = 0;
+frases.forEach((frase, index) => {
+  const degrau = document.createElement('div');
+  degrau.innerText = frase;
+  degrau.style.transform = `rotate(${angle}deg) translateY(-50px)`;
+  angle += 36;
+  escada.appendChild(degrau);
+});
+</script>
+</body>
+</center>
+</html>
