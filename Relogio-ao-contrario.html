@@ -1,0 +1,59 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+h1{
+ color:#DC143C;
+ background-color:#FF69B4;
+}
+pre{
+color:black;
+ background-color:#00FF00;
+}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relógio ao Contrário</title>
+</head>
+<body>
+<h1 id="clock">Tempo sem tempo! Relogio ao contrario.</h1>
+
+<script>
+function printTime() {
+  var date = new Date();
+  var hours = 12 - date.getHours();
+  var minutes = 60 - date.getMinutes();
+  var seconds = 60 - date.getSeconds();
+
+  var time = `${hours} horas ${minutes} minutos ${seconds} segundos`;
+  document.getElementById('clock').innerText = time;
+}
+
+setInterval(printTime, 1000);
+</script>
+<pre><h2>Tempo do espírito.</h2>Minha realidade,
+Começada em começar,
+sou amor, na plena capacidade de amar.
+tempo sem tempo, na hora de criar,
+é relogio em momento!
+pronto a recomeçar.
+Que amor!
+Que estranho tempo de amar.<br><img src="https://media.tenor.com/iyk_k5eyRLcAAAAC/clock-reverse-anti-clock.gif"width="100%"></pre>
+<div id="output"></div>
+<script>
+var printer = {
+outputElement: document.getElementById('output'),
+print: function(message) {
+this.outputElement.innerHTML += message + '<br>';
+}
+};
+// Exemplo de uso da biblioteca
+printer.print('Eu sou a biblioteca printer.print(). Criada para voce!');
+printer.print('Seja feliz por favor.');
+</script>
+</body>
+</html>
+
